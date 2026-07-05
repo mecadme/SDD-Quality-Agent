@@ -1,0 +1,14 @@
+/citaSalud-service/.gradle/
+/citaSalud-service/.idea/
+/citaSalud-service/build/
+/citaSalud-service/gradle/
+/citaSalud-service/graphify-out/
+/citaSalud-service/build.gradle
+
+/citaSalud-service/settings.gradle
+
+/citaSalud-service/.gitattributes
+/citaSalud-service/gradle.properties
+/citaSalud-service/gradlew
+/citaSalud-service/gradlew.bat
+
