@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Given una franja DISPONIBLE" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-05T00:07:33.916Z" hostname="MCADME" time="0.008">
-  <properties/>
-  <testcase name="When se reserva Then se confirma la Cita y se marca la franja RESERVADA" classname="org.ups.citasalud.unit.application.ReservarCitaUseCaseTest$DadaFranjaDisponible" time="0.008"/>
-  <system-out><![CDATA[2026-07-04T19:07:33.920-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.u.c.a.usecase.ReservarCitaUseCase      : Cita confirmada: citaId=45db37e9-09f5-4816-b11d-b5f24301d75e pacienteId=PAC-001 franjaHorariaId=FR-001
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

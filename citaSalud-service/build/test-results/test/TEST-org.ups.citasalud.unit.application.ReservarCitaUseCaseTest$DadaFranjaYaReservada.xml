@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Given una franja ya RESERVADA" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-05T00:07:33.929Z" hostname="MCADME" time="0.005">
-  <properties/>
-  <testcase name="When se reserva Then se lanza FranjaNoDisponibleException" classname="org.ups.citasalud.unit.application.ReservarCitaUseCaseTest$DadaFranjaYaReservada" time="0.005"/>
-  <system-out><![CDATA[2026-07-04T19:07:33.933-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.u.c.a.usecase.ReservarCitaUseCase      : Reserva rechazada: franjaHorariaId=FR-001 ya no estaba DISPONIBLE
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

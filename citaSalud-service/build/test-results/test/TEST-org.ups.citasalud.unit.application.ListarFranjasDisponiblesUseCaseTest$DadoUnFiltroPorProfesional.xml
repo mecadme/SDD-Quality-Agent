@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Given un filtro por profesional/servicio" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-05T00:07:33.895Z" hostname="MCADME" time="0.003">
-  <properties/>
-  <testcase name="When se listan Then se delega el filtro al repositorio" classname="org.ups.citasalud.unit.application.ListarFranjasDisponiblesUseCaseTest$DadoUnFiltroPorProfesional" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
