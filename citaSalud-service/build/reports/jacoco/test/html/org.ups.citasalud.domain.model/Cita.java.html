@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Cita.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">citaSalud-service</a> &gt; <a href="index.source.html" class="el_package">org.ups.citasalud.domain.model</a> &gt; <span class="el_source">Cita.java</span></div><h1>Cita.java</h1><pre class="source lang-java linenums">package org.ups.citasalud.domain.model;
+
+import java.time.LocalDateTime;
+import lombok.Getter;
+
+/**
+ * Registro que resulta de la confirmacion exitosa de una {@link FranjaHoraria}
+ * por parte de un paciente. Unica transicion soportada en el alcance de esta
+ * feature: creacion directa en estado CONFIRMADA.
+ */
+@Getter
+public final class Cita {
+
+<span class="fc" id="L14">    public enum Estado {</span>
+<span class="fc" id="L15">        CONFIRMADA</span>
+    }
+
+    private final String id;
+    private final String pacienteId;
+    private final String franjaHorariaId;
+    private final Estado estado;
+    private final LocalDateTime fechaHoraCreacion;
+
+    public Cita(String id, String pacienteId, String franjaHorariaId, Estado estado,
+<span class="fc" id="L25">            LocalDateTime fechaHoraCreacion) {</span>
+<span class="fc" id="L26">        this.id = id;</span>
+<span class="fc" id="L27">        this.pacienteId = pacienteId;</span>
+<span class="fc" id="L28">        this.franjaHorariaId = franjaHorariaId;</span>
+<span class="fc" id="L29">        this.estado = estado;</span>
+<span class="fc" id="L30">        this.fechaHoraCreacion = fechaHoraCreacion;</span>
+<span class="fc" id="L31">    }</span>
+
+    public static Cita confirmar(String id, String pacienteId, String franjaHorariaId,
+            LocalDateTime fechaHoraCreacion) {
+<span class="fc" id="L35">        return new Cita(id, pacienteId, franjaHorariaId, Estado.CONFIRMADA, fechaHoraCreacion);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

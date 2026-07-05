@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Given el paciente ya tiene una Cita CONFIRMADA que se superpone" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-05T00:07:33.901Z" hostname="MCADME" time="0.014">
+  <properties/>
+  <testcase name="When se reserva Then se lanza CitaSuperpuestaException y no se reserva la franja" classname="org.ups.citasalud.unit.application.ReservarCitaUseCaseTest$DadaSuperposicionDeHorario" time="0.014"/>
+  <system-out><![CDATA[2026-07-04T19:07:33.907-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.u.c.a.usecase.ReservarCitaUseCase      : Reserva rechazada por superposicion de horario: pacienteId=PAC-001 franjaHorariaId=FR-001
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

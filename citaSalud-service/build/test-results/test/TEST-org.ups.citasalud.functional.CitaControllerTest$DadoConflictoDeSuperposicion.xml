@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Given el paciente ya tiene una cita confirmada que se superpone" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-05T00:07:30.845Z" hostname="MCADME" time="0.047">
+  <properties/>
+  <testcase name="When POST /citas Then responde 409 CONFLICTO_HORARIO_PACIENTE" classname="org.ups.citasalud.functional.CitaControllerTest$DadoConflictoDeSuperposicion" time="0.016"/>
+  <system-out><![CDATA[2026-07-04T19:07:30.848-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.functional.CitaControllerTest$DadoConflictoDeSuperposicion]: DadoConflictoDeSuperposicion does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:30.853-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.functional.CitaControllerTest$DadoConflictoDeSuperposicion
+2026-07-04T19:07:30.855-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.functional.CitaControllerTest$DadoConflictoDeSuperposicion]: DadoConflictoDeSuperposicion does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:30.856-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.functional.CitaControllerTest]: CitaControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:30.868-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.functional.CitaControllerTest$DadoConflictoDeSuperposicion
+2026-07-04T19:07:30.885-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.u.c.p.GlobalExceptionHandler           : Reserva rechazada por superposicion de horario: el paciente ya tiene una cita confirmada que se superpone con la franja solicitada
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

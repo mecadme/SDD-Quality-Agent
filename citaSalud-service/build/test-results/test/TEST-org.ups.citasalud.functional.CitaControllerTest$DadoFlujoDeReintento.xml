@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Given el paciente recibió HORARIO_NO_DISPONIBLE (FR-008)" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-05T00:07:30.694Z" hostname="MCADME" time="0.051">
+  <properties/>
+  <testcase name="When repite POST /citas sobre otra franja DISPONIBLE Then obtiene 201" classname="org.ups.citasalud.functional.CitaControllerTest$DadoFlujoDeReintento" time="0.02"/>
+  <system-out><![CDATA[2026-07-04T19:07:30.696-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.functional.CitaControllerTest$DadoFlujoDeReintento]: DadoFlujoDeReintento does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:30.703-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.functional.CitaControllerTest$DadoFlujoDeReintento
+2026-07-04T19:07:30.705-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.functional.CitaControllerTest$DadoFlujoDeReintento]: DadoFlujoDeReintento does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:30.705-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.functional.CitaControllerTest]: CitaControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:30.712-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.functional.CitaControllerTest$DadoFlujoDeReintento
+2026-07-04T19:07:30.734-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.u.c.p.GlobalExceptionHandler           : Reserva rechazada por disponibilidad: horario no disponible
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

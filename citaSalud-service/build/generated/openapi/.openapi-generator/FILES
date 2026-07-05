@@ -1,0 +1,10 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/org/ups/citasalud/presentation/generated/api/ApiUtil.java
+src/main/java/org/ups/citasalud/presentation/generated/api/CitasApi.java
+src/main/java/org/ups/citasalud/presentation/generated/api/FranjasHorariasApi.java
+src/main/java/org/ups/citasalud/presentation/generated/model/Cita.java
+src/main/java/org/ups/citasalud/presentation/generated/model/ErrorReserva.java
+src/main/java/org/ups/citasalud/presentation/generated/model/FranjaHoraria.java
+src/main/java/org/ups/citasalud/presentation/generated/model/ReservaCitaRequest.java

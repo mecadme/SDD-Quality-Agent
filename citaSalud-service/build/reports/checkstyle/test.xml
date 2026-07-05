@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.20.2">
+<file name="C:\Users\mecad\workspace\Maestria Software\Control Agent\SDD-Quality-Agent\citaSalud-service\src\test\java\org\ups\citasalud\CitaSaludServiceApplicationTests.java">
+</file>
+<file name="C:\Users\mecad\workspace\Maestria Software\Control Agent\SDD-Quality-Agent\citaSalud-service\src\test\java\org\ups\citasalud\functional\CitaControllerTest.java">
+</file>
+<file name="C:\Users\mecad\workspace\Maestria Software\Control Agent\SDD-Quality-Agent\citaSalud-service\src\test\java\org\ups\citasalud\functional\ReservaCitaPerformanceTest.java">
+</file>
+<file name="C:\Users\mecad\workspace\Maestria Software\Control Agent\SDD-Quality-Agent\citaSalud-service\src\test\java\org\ups\citasalud\integration\CitaJpaRepositoryAdapterIT.java">
+</file>
+<file name="C:\Users\mecad\workspace\Maestria Software\Control Agent\SDD-Quality-Agent\citaSalud-service\src\test\java\org\ups\citasalud\integration\FranjaHorariaJpaRepositoryAdapterIT.java">
+</file>
+<file name="C:\Users\mecad\workspace\Maestria Software\Control Agent\SDD-Quality-Agent\citaSalud-service\src\test\java\org\ups\citasalud\unit\application\ListarFranjasDisponiblesUseCaseTest.java">
+</file>
+<file name="C:\Users\mecad\workspace\Maestria Software\Control Agent\SDD-Quality-Agent\citaSalud-service\src\test\java\org\ups\citasalud\unit\application\ReservarCitaUseCaseTest.java">
+</file>
+</checkstyle>

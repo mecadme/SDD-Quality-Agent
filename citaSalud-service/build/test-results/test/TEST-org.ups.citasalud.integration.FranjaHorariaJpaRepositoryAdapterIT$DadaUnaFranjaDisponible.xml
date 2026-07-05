@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Given una única FranjaHoraria DISPONIBLE" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-05T00:07:33.656Z" hostname="MCADME" time="0.053">
+  <properties/>
+  <testcase name="When dos reservas concurrentes llegan simultáneas Then exactamente una tiene éxito (SC-003)" classname="org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadaUnaFranjaDisponible" time="0.014"/>
+  <system-out><![CDATA[2026-07-04T19:07:33.660-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadaUnaFranjaDisponible]: DadaUnaFranjaDisponible does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:33.673-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadaUnaFranjaDisponible
+2026-07-04T19:07:33.674-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadaUnaFranjaDisponible]: DadaUnaFranjaDisponible does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:33.674-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT]: FranjaHorariaJpaRepositoryAdapterIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:33.690-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadaUnaFranjaDisponible
+Hibernate: update franja_horaria fhje1_0 set estado=? where fhje1_0.id=? and fhje1_0.estado=?
+Hibernate: update franja_horaria fhje1_0 set estado=? where fhje1_0.id=? and fhje1_0.estado=?
+2026-07-04T19:07:33.703-05:00  INFO 22964 --- [citaSalud-service] [pool-3-thread-1] .c.i.p.FranjaHorariaJpaRepositoryAdapter : Franja reservada: franjaHorariaId=FR-001 pacienteId=PAC-CONCURRENCIA-0
+Hibernate: select fhje1_0.id,fhje1_0.estado,fhje1_0.fecha_hora_fin,fhje1_0.fecha_hora_inicio,fhje1_0.profesional_o_servicio_id,fhje1_0.version from franja_horaria fhje1_0 where fhje1_0.id=?
+2026-07-04T19:07:33.705-05:00  INFO 22964 --- [citaSalud-service] [pool-3-thread-2] .c.i.p.FranjaHorariaJpaRepositoryAdapter : Intento de reserva rechazado: franjaHorariaId=FR-001 ya no estaba DISPONIBLE
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,116 @@
+{
+  "proyecto": "citaSalud-service",
+  "version": "0.0.1-SNAPSHOT",
+  "fecha": "2026-07-04",
+  "commit": "sin-commit (git rev-parse HEAD falla: 'no commits yet' en este repositorio)",
+  "tests": {
+    "comando": "./gradlew test jacocoTestReport",
+    "passed": 26,
+    "total": 26,
+    "coverage": 99.16,
+    "coverage_fuente": "build/reports/jacoco/test/jacocoTestReport.xml (contador report-level: LINE missed=1 covered=118 total=119 => 99.16%; INSTRUCTION missed=5 covered=509 => 99.02%; BRANCH missed=1 covered=9 => 90.0%). Re-verificado clase por clase con un parser XML (todas las 15 clases de produccion instrumentadas): la unica clase bajo 100% LINE es org/ups/citasalud/domain/model/FranjaHoraria con 90.0% linea (9/10; el constructor valida fechaHoraInicio<fechaHoraFin y esa rama de IllegalArgumentException no esta ejercitada), que sigue superando el umbral >80% por clase de la constitution y el que enforcea jacocoTestCoverageVerification (build.gradle:101-128, LINE minimum=0.80 por CLASS y BRANCH minimum=0.80, excluye CitaSaludServiceApplication* y presentation/generated/** via build.gradle:80). org/ups/citasalud/application/usecase/ReservarCitaUseCase quedo en 100% LINE (21/21), igual que antes de agregar las 2 pruebas nuevas (Optional.orElseThrow es codigo JDK no instrumentado como rama propia de esa clase, asi que el numero de cobertura no cambio, pero ahora SI existe una prueba que ejercita ese camino en tiempo de ejecucion -- ver EC-004 en criteria). Se corrio ademas `./gradlew jacocoTestCoverageVerification` de forma independiente: BUILD SUCCESSFUL, confirmando que el gate propio del proyecto (per-class LINE>=0.80) tambien pasa. Conteo de tests: sumados manualmente los atributos tests= de los 20 TEST-*.xml en build/test-results/test/ (18 de la corrida anterior + 2 nuevos: TEST-...ReservarCitaUseCaseTest$DadaFranjaInexistente.xml y TEST-...CitaControllerTest$DadoConflictoPorFranjaInexistente.xml): total 26, 0 failures, 0 errors."
+  },
+  "security": {
+    "fuente": "Semgrep real via CLI (uvx semgrep; el MCP server no estaba accesible en esta sesion pero el binario si se pudo instalar y ejecutar): `uvx semgrep --config=p/java --config=p/owasp-top-ten --config=p/secrets --config=p/security-audit src/main/java` -> 128 reglas, 20 archivos escaneados (~100% de las lineas parseadas), 0 findings. Complementado con grep de secretos (patron '(password|secret|api[_-]?key|token)\\s*[=:]\\s*\\S' sobre src/main, sin resultados) y lectura manual de application.properties y CitaController.java (el codigo de produccion no cambio respecto a la corrida anterior salvo por lineas de comentario/espacio que desplazaron numeros de linea).",
+    "critical": 0,
+    "high": 1,
+    "secrets": 0,
+    "hallazgos": [
+      {
+        "severidad": "high",
+        "regla": "manual-review (fuera del alcance de las reglas Semgrep genericas): consola H2 expuesta sin guarda de perfil",
+        "archivo": "src/main/resources/application.properties",
+        "linea": 16,
+        "nota": "spring.h2.console.enabled=true en el UNICO application.properties del proyecto (no existe application-prod.properties ni un perfil que la desactive). No hay Spring Security en el classpath (build.gradle sin spring-boot-starter-security), asi que si el artefacto se despliega tal cual, /h2-console quedaria accesible sin autenticacion. Persiste igual que en la corrida anterior (antes reportado en linea 12; el archivo crecio con comentarios y la propiedad se desplazo a la linea 16, sin cambio de fondo). No bloquea el gate por si sola (es 'high'), pero debe triagearse antes de produccion."
+      },
+      {
+        "severidad": "informativo",
+        "regla": "manual-review: endpoints sin autenticacion",
+        "archivo": "src/main/java/org/ups/citasalud/presentation/CitaController.java",
+        "linea": 22,
+        "nota": "GET /franjas-horarias, POST /citas y GET /citas no exigen autenticacion (no hay filtro de seguridad en todo el proyecto). spec.md (Assumptions, linea 161-164) declara la autenticacion de pacientes fuera de alcance de esta feature y delegada a un mecanismo externo, por lo que no se cuenta como hallazgo bloqueante, pero no hay evidencia en este repo de que ese mecanismo exista."
+      }
+    ]
+  },
+  "spec": "specs/001-online-appointment-booking/spec.md",
+  "criteria": [
+    {
+      "id": "FR-001",
+      "fuente": "spec.md · FR-001 (consultar franjas disponibles 24/7)",
+      "status": "cumple",
+      "evidencia": "ListarFranjasDisponiblesUseCaseTest$DadasFranjasSinFiltro.listaTodasLasDisponibles (unit, ListarFranjasDisponiblesUseCaseTest.java:38, @DisplayName cita 'FR-001') PASA; FranjaHorariaJpaRepositoryAdapterIT$DadasFranjasPrecargadas.listarDisponiblesSinFiltro (integration contra H2 real, FranjaHorariaJpaRepositoryAdapterIT.java:91, @DisplayName cita 'FR-001') PASA; CitaControllerTest$DadasFranjasDisponibles.listaFranjasDisponibles (functional, CitaControllerTest.java:70, GET /franjas-horarias -> 200) PASA. No existe logica de horario de atencion que restrinja la consulta en CitaController.java ni FranjaHoraria.java, consistente con disponibilidad 24/7. Sin cambios respecto a la corrida anterior."
+    },
+    {
+      "id": "FR-002",
+      "fuente": "spec.md · FR-002 (seleccionar franja disponible y confirmar reserva)",
+      "status": "cumple",
+      "evidencia": "ReservarCitaUseCaseTest$DadaFranjaDisponible.confirmaLaReserva (ReservarCitaUseCaseTest.java:57-70) PASA, assert cita.getEstado()==CONFIRMADA; CitaControllerTest$DadaUnaReservaExitosa.reservaExitosaYFranjaYaNoDisponible (CitaControllerTest.java:86-99, POST /citas -> 201) PASA. Sin cambios."
+    },
+    {
+      "id": "FR-003",
+      "fuente": "spec.md · FR-003 (registrar la cita de forma persistente al confirmar)",
+      "status": "cumple",
+      "evidencia": "CitaJpaRepositoryAdapterIT$DadaUnaFranjaPrecargada.guardarYBuscarPorPacienteYFranja (CitaJpaRepositoryAdapterIT.java:32-42, integration, H2 real via @DataJpaTest, sin mocks) PASA; ReservarCitaUseCaseTest.confirmaLaReserva verifica citaRepository.guardar(any(Cita.class)) invocado (ReservarCitaUseCase.java:47-48). Sin cambios."
+    },
+    {
+      "id": "FR-004",
+      "fuente": "spec.md · FR-004 (bloquear la franja inmediatamente tras confirmacion)",
+      "status": "cumple",
+      "evidencia": "FranjaHorariaJpaRepositoryAdapterIT$DadaUnaFranjaReservadaPorOtroPaciente.franjaReservadaDejaDeListarseComoDisponible (FranjaHorariaJpaRepositoryAdapterIT.java:129-139, integration, H2 real) PASA: reserva FR-004 y comprueba de inmediato que listarDisponibles ya no la incluye; ReservarCitaUseCaseTest.confirmaLaReserva verifica franjaHorariaRepository.reservar(FRANJA_ID, PACIENTE_ID) invocado. Sin cambios."
+    },
+    {
+      "id": "FR-005",
+      "fuente": "spec.md · FR-005 (concurrencia: solo una reserva prospera sobre la misma franja)",
+      "status": "cumple",
+      "evidencia": "FranjaHorariaJpaRepositoryAdapterIT$DadaUnaFranjaDisponible.soloUnaReservaTieneExito (FranjaHorariaJpaRepositoryAdapterIT.java:42-73, SC-003) PASA: 2 hilos reales (ExecutorService + CountDownLatch, sin mocks) contra H2 real, assertThat(reservasExitosas).isEqualTo(1). CAVEAT sin cambios respecto a la corrida anterior: no existe una prueba dedicada que use el MISMO pacienteId en ambos hilos concurrentes (doble clic); la cobertura de ese sub-caso sigue siendo una inferencia sobre el mismo camino de codigo (FranjaHorariaJpaRepositoryAdapter.java), no una prueba directa."
+    },
+    {
+      "id": "FR-006",
+      "fuente": "spec.md · FR-006 (confirmacion inmediata al paciente)",
+      "status": "cumple",
+      "evidencia": "CitaControllerTest$DadaUnaReservaExitosa.reservaExitosaYFranjaYaNoDisponible (CitaControllerTest.java:86-99) PASA: POST /citas devuelve 201 con body {estado: CONFIRMADA, pacienteId} en la misma interaccion HTTP. Sin cambios."
+    },
+    {
+      "id": "FR-007",
+      "fuente": "spec.md · FR-007 (detectar franja no disponible y mostrar 'horario no disponible')",
+      "status": "cumple",
+      "evidencia": "Caso 'franja ya tomada' (estado != DISPONIBLE): ReservarCitaUseCaseTest$DadaFranjaYaReservada.lanzaFranjaNoDisponible (ReservarCitaUseCaseTest.java:77-89) PASA; CitaControllerTest$DadoConflictoDeDisponibilidad.conflictoPorFranjaNoDisponible (CitaControllerTest.java:106-116) PASA, 409 + jsonPath('$.mensaje')=='horario no disponible'. Sub-caso 'franja no encontrada/eliminada' AHORA CUBIERTO (cambio respecto a la corrida anterior, ver EC-004): ReservarCitaUseCaseTest$DadaFranjaInexistente.lanzaFranjaNoDisponible (ReservarCitaUseCaseTest.java:93-107) mockea buscarPorId(...)=Optional.empty() y asserta FranjaNoDisponibleException; CitaControllerTest$DadoConflictoPorFranjaInexistente.conflictoPorFranjaInexistente (CitaControllerTest.java:120-134) verifica 409 HORARIO_NO_DISPONIBLE para una franja inexistente (FR-999). El GAP que la auditoria anterior dejaba abierto en este FR ya no existe."
+    },
+    {
+      "id": "FR-008",
+      "fuente": "spec.md · FR-008 (elegir otra franja tras el aviso, sin reiniciar el flujo)",
+      "status": "cumple",
+      "evidencia": "CitaControllerTest$DadoFlujoDeReintento.reintentaConOtraFranjaYObtieneExito (CitaControllerTest.java:180-193) PASA: mismo pacienteId, primer POST /citas sobre FR-001 -> 409, segundo POST /citas sobre FR-002 (misma sesion de test) -> 201. Sin cambios."
+    },
+    {
+      "id": "FR-009",
+      "fuente": "spec.md · FR-009 (reflejar en tiempo real el estado de disponibilidad)",
+      "status": "cumple",
+      "evidencia": "FranjaHorariaJpaRepositoryAdapterIT$DadaUnaFranjaReservadaPorOtroPaciente.franjaReservadaDejaDeListarseComoDisponible (FranjaHorariaJpaRepositoryAdapterIT.java:129-139, @DisplayName cita 'FR-009') PASA: verifica ANTES que FR-004 aparece en listarDisponibles, ejecuta reservar(), y DESPUES verifica que ya no aparece, sobre la misma instancia de H2 real, sin mocks. Sin cambios."
+    },
+    {
+      "id": "FR-010",
+      "fuente": "spec.md · FR-010 (asociar cada cita con pacienteId y franjaId, trazabilidad)",
+      "status": "cumple",
+      "evidencia": "ReservarCitaUseCaseTest.confirmaLaReserva (ReservarCitaUseCaseTest.java:66-67) assert cita.getPacienteId()==PACIENTE_ID y cita.getFranjaHorariaId()==FRANJA_ID; CitaJpaRepositoryAdapterIT.guardarYBuscarPorPacienteYFranja persiste y recupera por ambos campos contra H2 real. Sin cambios."
+    },
+    {
+      "id": "FR-011",
+      "fuente": "spec.md · FR-011 (rechazar reserva que se superponga con cita ya confirmada del mismo paciente)",
+      "status": "cumple",
+      "evidencia": "Cubierto en las 3 capas BDD que exige la constitution: unit -> ReservarCitaUseCaseTest$DadaSuperposicionDeHorario.lanzaCitaSuperpuesta (ReservarCitaUseCaseTest.java:113-126) PASA; integration -> CitaJpaRepositoryAdapterIT$DadaUnaCitaConfirmadaPrevia.existeSuperposicionConFranjaSolapada / .existeSuperposicionSinSolape (CitaJpaRepositoryAdapterIT.java:56-75) PASAn; functional -> CitaControllerTest$DadoConflictoDeSuperposicion.conflictoPorSuperposicionDeHorario (CitaControllerTest.java:140-149, POST /citas -> 409 CONFLICTO_HORARIO_PACIENTE) PASA. Sin cambios."
+    },
+    {
+      "id": "FR-012",
+      "fuente": "spec.md · FR-012 (consultar si una reserva quedo registrada por pacienteId+franjaHorariaId)",
+      "status": "cumple",
+      "evidencia": "CitaJpaRepositoryAdapterIT$DadaUnaFranjaPrecargada.guardarYBuscarPorPacienteYFranja / .buscarPorPacienteYFranjaInexistente (CitaJpaRepositoryAdapterIT.java:32-48) PASAn; CitaControllerTest$DadaConsultaDeReconciliacion.citaEncontrada / .citaNoEncontrada (CitaControllerTest.java:157-173, GET /citas -> 200/404) PASAn. CitaController.buscarCitaPorPacienteYFranja (CitaController.java:60-66) documenta la reconciliacion tras perdida de conexion. Sin cambios."
+    },
+    {
+      "id": "EC-004",
+      "fuente": "spec.md · Edge Cases, bullet 4 ('¿Que sucede si la franja seleccionada deja de existir... entre que el paciente la visualiza y la confirma? Debe tratarse igual que una franja no disponible.')",
+      "status": "cumple",
+      "evidencia": "CAMBIO respecto a la corrida anterior (antes 'incumple' por falta de prueba dedicada; ahora cerrado). El codigo de ReservarCitaUseCase.java:30-31 maneja el caso (franjaHorariaRepository.buscarPorId(...).orElseThrow(FranjaNoDisponibleException::new)). Ahora existe: (1) ReservarCitaUseCaseTest$DadaFranjaInexistente.lanzaFranjaNoDisponible (ReservarCitaUseCaseTest.java:93-107): mockea franjaHorariaRepository.buscarPorId(FRANJA_ID) devolviendo Optional.empty(), asserta que se lanza FranjaNoDisponibleException, y con verify(..., never()) confirma que NO se llama a franjaHorariaRepository.reservar(...) ni a citaRepository.guardar(...) -- exactamente la asercion que el hueco pedia (mismo tratamiento que 'franja no disponible', sin efectos secundarios). (2) CitaControllerTest$DadoConflictoPorFranjaInexistente.conflictoPorFranjaInexistente (CitaControllerTest.java:120-134): POST /citas con franjaHorariaId=FR-999 (franja inexistente) mockeando reservarCitaUseCase.reservar(...) para lanzar FranjaNoDisponibleException, y verifica 409 + jsonPath('$.codigo')=='HORARIO_NO_DISPONIBLE' + jsonPath('$.mensaje')=='horario no disponible'. Ambas pruebas se ejecutaron en esta corrida (build/test-results/test/TEST-org.ups.citasalud.unit.application.ReservarCitaUseCaseTest$DadaFranjaInexistente.xml y TEST-org.ups.citasalud.functional.CitaControllerTest$DadoConflictoPorFranjaInexistente.xml), ambas con tests=1 failures=0 errors=0. NOTA de honestidad: el test funcional mockea directamente ReservarCitaUseCase (via @WebMvcTest + @MockitoBean), por lo que NO ejercita el Optional.empty() real de principio a fin en esa capa (eso ya lo hace el test unitario); el test funcional aporta evidencia de que el controller traduce FranjaNoDisponibleException a 409/HORARIO_NO_DISPONIBLE tambien quando el origen es una franja inexistente, cerrando la brecha de extremo a extremo entre las dos capas de prueba."
+    }
+  ]
+}

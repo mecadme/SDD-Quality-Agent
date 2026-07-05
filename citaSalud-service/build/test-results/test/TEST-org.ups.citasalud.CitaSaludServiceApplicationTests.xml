@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.ups.citasalud.CitaSaludServiceApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-05T00:07:19.031Z" hostname="MCADME" time="9.74">
+  <properties/>
+  <testcase name="contextLoads()" classname="org.ups.citasalud.CitaSaludServiceApplicationTests" time="0.493"/>
+  <system-out><![CDATA[19:07:19.427 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [org.ups.citasalud.CitaSaludServiceApplicationTests]: CitaSaludServiceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:07:19.598 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.CitaSaludServiceApplicationTests
+19:07:19.776 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [org.ups.citasalud.CitaSaludServiceApplicationTests]: CitaSaludServiceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:07:19.778 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.CitaSaludServiceApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.0)
+
+2026-07-04T19:07:20.369-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.u.c.CitaSaludServiceApplicationTests   : Starting CitaSaludServiceApplicationTests using Java 25.0.3 with PID 22964 (started by mecad in C:\Users\mecad\workspace\Maestria Software\Control Agent\SDD-Quality-Agent\citaSalud-service)
+2026-07-04T19:07:20.376-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.u.c.CitaSaludServiceApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2026-07-04T19:07:21.328-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-04T19:07:21.420-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77 ms. Found 2 JPA repository interfaces.
+2026-07-04T19:07:21.951-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-04T19:07:22.415-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:citasalud user=SA
+2026-07-04T19:07:22.418-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-04T19:07:22.683-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-04T19:07:22.847-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-04T19:07:23.719-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-04T19:07:23.930-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:citasalud]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: CITASALUD/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-04T19:07:26.021-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-04T19:07:26.033-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-04T19:07:26.165-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-04T19:07:27.621-05:00  WARN 22964 --- [citaSalud-service] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-04T19:07:28.137-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:citasalud'
+2026-07-04T19:07:28.260-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] o.u.c.CitaSaludServiceApplicationTests   : Started CitaSaludServiceApplicationTests in 8.333 seconds (process running for 10.875)
+]]></system-out>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\mecad\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.18.10\9426d28828bdcdf42666bb7a68c468279ea78f59\byte-buddy-agent-1.18.10.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

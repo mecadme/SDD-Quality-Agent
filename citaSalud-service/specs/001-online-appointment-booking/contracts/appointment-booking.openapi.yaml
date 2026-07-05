@@ -1,0 +1,158 @@
+openapi: 3.0.3
+info:
+  title: citaSalud - Reserva de citas
+  description: >
+    Operaciones de esta feature (US-01): consulta de franjas horarias
+    disponibles y reserva de citas. Estas operaciones se integran al
+    contrato canónico del proyecto en openapi/citasalud-v1.yaml.
+  version: 1.0.1
+paths:
+  /franjas-horarias:
+    get:
+      operationId: listarFranjasDisponibles
+      summary: Consultar franjas horarias disponibles
+      description: >
+        Devuelve las franjas horarias actualmente en estado DISPONIBLE.
+        Disponible 24/7, independientemente del horario de atención de la
+        clínica (FR-001, SC-002).
+      parameters:
+        - name: profesionalOServicioId
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filtro opcional por profesional o servicio.
+      responses:
+        '200':
+          description: Lista de franjas disponibles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FranjaHoraria'
+
+  /citas:
+    post:
+      operationId: reservarCita
+      summary: Reservar una cita sobre una franja horaria disponible
+      description: >
+        Confirma la reserva de una franja horaria a nombre de un paciente
+        (FR-002, FR-003, FR-004, FR-006). Si la franja ya no está
+        disponible — porque fue tomada por otro paciente o porque dejó de
+        existir (fue eliminada/reprogramada) — responde 409 con el motivo
+        "horario no disponible" (FR-005, FR-007; ambos casos se tratan
+        igual, ver spec.md Edge Cases). Si el paciente ya tiene otra cita
+        confirmada que se superpone en horario con la franja solicitada,
+        responde 409 con `CONFLICTO_HORARIO_PACIENTE` (FR-011).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservaCitaRequest'
+      responses:
+        '201':
+          description: Cita registrada y confirmada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cita'
+        '409':
+          description: >
+            La franja horaria ya no está disponible (fue reservada por
+            otro paciente, o dejó de existir) — `HORARIO_NO_DISPONIBLE` —
+            o el paciente ya tiene una cita confirmada que se superpone en
+            horario con la franja solicitada — `CONFLICTO_HORARIO_PACIENTE`
+            (FR-007, FR-008, FR-011). El cliente debe permitir elegir otra
+            franja.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorReserva'
+    get:
+      operationId: buscarCitaPorPacienteYFranja
+      summary: >
+        Verificar si una reserva quedó registrada para un paciente y una
+        franja (reconciliación tras pérdida de conexión, ver spec.md Edge
+        Cases)
+      parameters:
+        - name: pacienteId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: franjaHorariaId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cita encontrada (la reserva sí quedó registrada).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cita'
+        '404':
+          description: >
+            No existe una Cita para ese paciente y franja (la reserva no
+            quedó registrada).
+
+components:
+  schemas:
+    FranjaHoraria:
+      type: object
+      properties:
+        id:
+          type: string
+        fechaHoraInicio:
+          type: string
+          format: date-time
+        fechaHoraFin:
+          type: string
+          format: date-time
+        profesionalOServicioId:
+          type: string
+        estado:
+          type: string
+          enum: [DISPONIBLE, RESERVADA]
+      required: [id, fechaHoraInicio, fechaHoraFin, estado]
+
+    ReservaCitaRequest:
+      type: object
+      properties:
+        franjaHorariaId:
+          type: string
+        pacienteId:
+          type: string
+      required: [franjaHorariaId, pacienteId]
+
+    Cita:
+      type: object
+      properties:
+        id:
+          type: string
+        pacienteId:
+          type: string
+        franjaHorariaId:
+          type: string
+        estado:
+          type: string
+          enum: [CONFIRMADA]
+        fechaHoraCreacion:
+          type: string
+          format: date-time
+      required: [id, pacienteId, franjaHorariaId, estado, fechaHoraCreacion]
+
+    ErrorReserva:
+      type: object
+      properties:
+        codigo:
+          type: string
+          enum: [HORARIO_NO_DISPONIBLE, CONFLICTO_HORARIO_PACIENTE]
+          example: HORARIO_NO_DISPONIBLE
+        mensaje:
+          type: string
+          example: horario no disponible
+      required: [codigo, mensaje]

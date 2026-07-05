@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservarCitaUseCase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">citaSalud-service</a> &gt; <a href="index.source.html" class="el_package">org.ups.citasalud.application.usecase</a> &gt; <span class="el_source">ReservarCitaUseCase.java</span></div><h1>ReservarCitaUseCase.java</h1><pre class="source lang-java linenums">package org.ups.citasalud.application.usecase;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+import lombok.extern.slf4j.Slf4j;
+import org.ups.citasalud.application.port.CitaRepository;
+import org.ups.citasalud.application.port.FranjaHorariaRepository;
+import org.ups.citasalud.domain.exception.CitaSuperpuestaException;
+import org.ups.citasalud.domain.exception.FranjaNoDisponibleException;
+import org.ups.citasalud.domain.model.Cita;
+import org.ups.citasalud.domain.model.FranjaHoraria;
+
+/**
+ * Orquesta la reserva de una {@link FranjaHoraria} a nombre de un paciente
+ * (US-01): valida superposicion de horario del paciente (FR-011) antes de
+ * intentar la transicion atomica de la franja (FR-004, FR-005).
+ */
+<span class="fc" id="L18">@Slf4j</span>
+public class ReservarCitaUseCase {
+
+    private final FranjaHorariaRepository franjaHorariaRepository;
+    private final CitaRepository citaRepository;
+
+<span class="fc" id="L24">    public ReservarCitaUseCase(FranjaHorariaRepository franjaHorariaRepository, CitaRepository citaRepository) {</span>
+<span class="fc" id="L25">        this.franjaHorariaRepository = franjaHorariaRepository;</span>
+<span class="fc" id="L26">        this.citaRepository = citaRepository;</span>
+<span class="fc" id="L27">    }</span>
+
+    public Cita reservar(String pacienteId, String franjaHorariaId) {
+<span class="fc" id="L30">        FranjaHoraria franja = franjaHorariaRepository.buscarPorId(franjaHorariaId)</span>
+<span class="fc" id="L31">                .orElseThrow(FranjaNoDisponibleException::new);</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (!franja.estaDisponible()) {</span>
+<span class="fc" id="L33">            log.info(&quot;Reserva rechazada: franjaHorariaId={} ya no estaba DISPONIBLE&quot;, franjaHorariaId);</span>
+<span class="fc" id="L34">            throw new FranjaNoDisponibleException();</span>
+        }
+
+<span class="fc" id="L37">        boolean seSuperpone = citaRepository.existeSuperposicion(</span>
+<span class="fc" id="L38">                pacienteId, franja.getFechaHoraInicio(), franja.getFechaHoraFin());</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (seSuperpone) {</span>
+<span class="fc" id="L40">            log.info(&quot;Reserva rechazada por superposicion de horario: pacienteId={} franjaHorariaId={}&quot;,</span>
+                    pacienteId, franjaHorariaId);
+<span class="fc" id="L42">            throw new CitaSuperpuestaException();</span>
+        }
+
+<span class="fc" id="L45">        franjaHorariaRepository.reservar(franjaHorariaId, pacienteId);</span>
+
+<span class="fc" id="L47">        Cita cita = Cita.confirmar(UUID.randomUUID().toString(), pacienteId, franjaHorariaId, LocalDateTime.now());</span>
+<span class="fc" id="L48">        Cita guardada = citaRepository.guardar(cita);</span>
+<span class="fc" id="L49">        log.info(&quot;Cita confirmada: citaId={} pacienteId={} franjaHorariaId={}&quot;,</span>
+<span class="fc" id="L50">                guardada.getId(), pacienteId, franjaHorariaId);</span>
+<span class="fc" id="L51">        return guardada;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

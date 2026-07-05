@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Given las franjas horarias precargadas (data.sql)" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-07-05T00:07:33.713Z" hostname="MCADME" time="0.088">
+  <properties/>
+  <testcase name="When listarDisponibles sin filtro Then incluye las franjas DISPONIBLES precargadas (FR-001)" classname="org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadasFranjasPrecargadas" time="0.012"/>
+  <testcase name="When listarDisponibles con filtro por profesional Then solo devuelve las de ese profesional" classname="org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadasFranjasPrecargadas" time="0.013"/>
+  <testcase name="When buscarPorId con un id existente Then devuelve la franja" classname="org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadasFranjasPrecargadas" time="0.01"/>
+  <testcase name="When buscarPorId con un id inexistente Then devuelve Optional vacio" classname="org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadasFranjasPrecargadas" time="0.009"/>
+  <system-out><![CDATA[2026-07-04T19:07:33.715-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadasFranjasPrecargadas]: DadasFranjasPrecargadas does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:33.727-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadasFranjasPrecargadas
+2026-07-04T19:07:33.728-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadasFranjasPrecargadas]: DadasFranjasPrecargadas does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:33.728-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT]: FranjaHorariaJpaRepositoryAdapterIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:33.737-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.integration.FranjaHorariaJpaRepositoryAdapterIT$DadasFranjasPrecargadas
+Hibernate: select fhje1_0.id,fhje1_0.estado,fhje1_0.fecha_hora_fin,fhje1_0.fecha_hora_inicio,fhje1_0.profesional_o_servicio_id,fhje1_0.version from franja_horaria fhje1_0 where fhje1_0.estado=?
+Hibernate: select fhje1_0.id,fhje1_0.estado,fhje1_0.fecha_hora_fin,fhje1_0.fecha_hora_inicio,fhje1_0.profesional_o_servicio_id,fhje1_0.version from franja_horaria fhje1_0 where fhje1_0.estado=? and fhje1_0.profesional_o_servicio_id=?
+Hibernate: select fhje1_0.id,fhje1_0.estado,fhje1_0.fecha_hora_fin,fhje1_0.fecha_hora_inicio,fhje1_0.profesional_o_servicio_id,fhje1_0.version from franja_horaria fhje1_0 where fhje1_0.id=?
+Hibernate: select fhje1_0.id,fhje1_0.estado,fhje1_0.fecha_hora_fin,fhje1_0.fecha_hora_inicio,fhje1_0.profesional_o_servicio_id,fhje1_0.version from franja_horaria fhje1_0 where fhje1_0.id=?
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

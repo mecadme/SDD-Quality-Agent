@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Given franjas horarias DISPONIBLES" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-05T00:07:30.636Z" hostname="MCADME" time="0.053">
+  <properties/>
+  <testcase name="When GET /franjas-horarias Then responde 200 con la lista de franjas" classname="org.ups.citasalud.functional.CitaControllerTest$DadasFranjasDisponibles" time="0.022"/>
+  <system-out><![CDATA[2026-07-04T19:07:30.639-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.functional.CitaControllerTest$DadasFranjasDisponibles]: DadasFranjasDisponibles does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:30.645-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.functional.CitaControllerTest$DadasFranjasDisponibles
+2026-07-04T19:07:30.646-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.functional.CitaControllerTest$DadasFranjasDisponibles]: DadasFranjasDisponibles does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:30.646-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.ups.citasalud.functional.CitaControllerTest]: CitaControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-04T19:07:30.653-05:00  INFO 22964 --- [citaSalud-service] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.ups.citasalud.CitaSaludServiceApplication for test class org.ups.citasalud.functional.CitaControllerTest$DadasFranjasDisponibles
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
