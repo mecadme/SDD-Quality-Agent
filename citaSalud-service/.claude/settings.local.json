@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls .specify/memory/)",
+      "Bash(ls .specify/)",
+      "Bash(cat .specify/extensions.yml)",
+      "Bash(ls *.md)",
+      "Bash(ls docs *)",
+      "Bash(grep -rl \"PRINCIPLE\\\\|constitution\" .specify/templates/commands/)",
+      "PowerShell(pwsh -File .specify/scripts/powershell/setup-plan.ps1 -Json)",
+      "PowerShell(powershell -File .specify/scripts/powershell/setup-plan.ps1 -Json)",
+      "PowerShell(powershell -File .specify/scripts/powershell/setup-tasks.ps1 -Json)",
+      "Bash(python3 -c \"import graphify\")",
+      "Bash(python -c \"import graphify\")",
+      "Bash(python *)",
+      "Bash(\"C:/Program Files/Python312/python.exe\" -m pip show graphifyy)",
+      "Bash(xxd \"graphify-out/.graphify_python\")",
+      "Bash(pwsh -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json -RequireTasks -IncludeTasks)",
+      "PowerShell(.specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks)",
+      "Bash(pwsh -File .specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks)",
+      "Bash(powershell -File .specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks)",
+      "Bash(./gradlew.bat --version)",
+      "Bash(curl -sSL --max-time 15 -o /tmp/google_checks.xml https://raw.githubusercontent.com/checkstyle/checkstyle/master/src/main/resources/google_checks.xml -w \"HTTP:%{http_code} SIZE:%{size_download}\\\\n\")",
+      "Bash(./gradlew.bat openApiGenerate --console=plain)",
+      "Bash(./gradlew.bat compileJava --console=plain)",
+      "Bash(./gradlew.bat dependencies *)",
+      "Bash(./gradlew.bat compileTestJava --console=plain)",
+      "Bash(unzip -l \"/c/Users/mecad/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-test-autoconfigure/4.1.0/d8c05e21151a63ae829cd313418b942c92334874/spring-boot-test-autoconfigure-4.1.0.jar\")",
+      "Bash(unzip -l \"/c/Users/mecad/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-webmvc-test/4.1.0/977bae6039a35c982cd1c75c991a9a55f45ec4d7/spring-boot-webmvc-test-4.1.0.jar\")",
+      "Bash(unzip -l \"/c/Users/mecad/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-data-jpa-test/4.1.0/e42e3b676e832da183be0490f3d74014a151c516/spring-boot-data-jpa-test-4.1.0.jar\")",
+      "Bash(grep -i \"class$\")",
+      "Bash(unzip -l \"/c/Users/mecad/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/7.0.8/a69fb470b6fbf2960552150e4a37e6903dbd2f49/spring-test-7.0.8.jar\")",
+      "Bash(./gradlew.bat test *)",
+      "Bash(./gradlew.bat -Dfile.encoding=UTF-8 test --console=plain --tests \"org.ups.citasalud.unit.application.ReservarCitaUseCaseTest\")",
+      "Bash(./gradlew.bat --stop --console=plain)"
+    ]
+  }
+}
